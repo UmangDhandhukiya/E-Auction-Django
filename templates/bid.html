@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Start Bidding | E-Auction</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Animate.css for animations -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        width: 100vw;
+        background-color: #f8f9fa;
+        font-family: "Segoe UI", sans-serif;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      .h-primary {
+        font-size: 2.5rem;
+        padding: 20px;
+        text-align: center;
+        font-weight: bold;
+        color: #2c3e50;
+      }
+
+      /* Services Section */
+      #service-container {
+        padding: 2rem;
+      }
+
+      #service {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 2rem;
+      }
+
+      .box {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        text-align: center;
+        position: relative;
+      }
+
+      .box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .box img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+      }
+
+      .box:hover img {
+        transform: scale(1.05);
+      }
+
+      .box h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: #34495e;
+      }
+
+      .box p {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 1rem;
+      }
+
+      .timer {
+        font-weight: bold;
+        color: red;
+        margin-bottom: 10px;
+      }
+
+      .btn {
+        padding: 6px 16px;
+        border: none;
+        background-color: #e74c3c;
+        color: white;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .btn a {
+        text-decoration: none;
+        color: white;
+      }
+
+      .btn:hover {
+        background-color: #c0392b;
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 576px) {
+        .h-primary {
+          font-size: 2rem;
+        }
+
+        .box img {
+          height: 140px;
+        }
+
+        .box h4 {
+          font-size: 1rem;
+        }
+
+        .box p {
+          font-size: 0.85rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <h1 class="h-primary">Start Bidding Product</h1>
+
+    <!-- Services Section -->
+    <section id="service-container">
+      <div id="service">
+        {% for p in products %}
+        <div class="box animate__animated animate__fadeInUp">
+          <img src="{{ p.image.url }}" alt="{{ p.caption }}" />
+          <h4>{{ p.caption }}</h4>
+          <p>{{ p.des }}</p>
+
+          <!-- Countdown Timer -->
+          <p id="timer-{{ p.id }}" class="timer">Loading time...</p>
+
+          <!-- Hidden field for end time -->
+          <input
+            type="hidden"
+            id="end-time-{{ p.id }}"
+            value="{{ p.auction_end_time|date:'Y-m-d H:i:s' }}"
+          />
+
+          <!-- Bid Now Button -->
+          <button class="btn" id="bid-btn-{{ p.id }}">
+            <a href="{% url 'final' p.id %}">Bid Now</a>
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- JavaScript for Countdown Timer -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const products = document.querySelectorAll("[id^='end-time-']");
+
+        products.forEach((input) => {
+          const id = input.id.split("-")[2];
+          const timerElement = document.getElementById(`timer-${id}`);
+          const bidBtn = document.getElementById(`bid-btn-${id}`);
+          const endTime = new Date(input.value).getTime();
+
+          function updateTimer() {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+
+            if (distance <= 0) {
+              timerElement.innerHTML = "Auction Ended";
+              timerElement.style.color = "gray";
+              bidBtn.style.display = "none";
+              return;
+            }
+
+            const hours = Math.floor(
+              (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            const minutes = Math.floor(
+              (distance % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            timerElement.innerHTML = `Ends in: ${hours}h ${minutes}m ${seconds}s`;
+          }
+
+          updateTimer();
+          setInterval(updateTimer, 1000);
+        });
+      });
+    </script>
+  </body>
+</html>

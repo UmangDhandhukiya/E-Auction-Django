@@ -1,0 +1,210 @@
+/* css reset  */
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: cursive;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+/* css variables */
+:root {
+    --navbar-height: 50px
+}
+
+/* navigation bar */
+
+#logo {
+    margin: 3px 5px;
+}
+
+#logo img {
+    height: 40px;
+    width: 40px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+/* navbar list style */
+
+#navbar ul {
+    display: flex;
+}
+
+#navbar::before {
+    content: "";
+    background-color: blue;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .4;
+}
+
+#navbar ul li {
+    list-style: none;
+    font-size: 1rem;
+}
+
+#navbar ul li a {
+    color: white;
+    display: block;
+    padding: 3px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+#navbar ul li a:hover {
+    color: black;
+    background-color: white;
+}
+
+/* home section */
+
+.logout{
+    margin-left:675px; 
+    font-size:0.8rem; 
+    background-color:rgb(253, 253, 103); 
+    color:black; 
+    font-weight:bold;
+    border: 2px solid black ;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+#home{
+    display: flex;
+    flex-direction: column;
+    padding: 25px 13px;
+    height: 450px;
+    justify-content: center;
+    align-items: center;
+}
+
+#home::before{
+    content: "";
+    background:url(/static/bg2.jpg) no-repeat center center/cover;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .6;
+}
+
+#home h1{
+    display: block;
+    color: black;
+    text-align: center;
+}
+
+#home p{
+    color: black;
+    text-align: center;
+    font-size: 1rem;
+
+}
+
+/* service section */
+#service{
+    display: flex;
+    margin: 34px;
+}
+
+#service .box{
+    border: 2px solid rgb(45, 45, 209);
+    margin: 0px 22px;
+    padding: 5px;
+    border-radius: 23px;
+}
+
+#service .box img{
+    height: 160px;
+    display: block;
+    margin: auto;
+}
+
+/* contact section */
+#contact{
+    position: relative;
+}
+
+#contact::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: .5;
+    background: url('/static/four.jpg') no-repeat center center/cover;
+}
+
+#contact-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 34px;
+}
+
+#contact-box form{
+   width: 40%;
+
+}
+
+#contact-box label{
+    font-size: 1.3rem;
+    
+ }
+
+#contact-box input{
+    width:100%;
+    padding: 0.5rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+}
+
+footer{
+    background-color: black;
+    color: white;
+}
+/* Utility class */
+.h-primary{
+    font-size: 2.8rem;
+    padding: 20px;
+}
+
+.center{
+    text-align: center;
+}
+
+.h-secondary{
+    font-size: 2.2rem;
+    padding: 20px;
+}
+
+.btn{
+    padding: 6px 20px;
+    border: 2px solid white;
+    background-color: brown;
+    color: white;
+    margin: 17px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+ 
+
+  

@@ -1,0 +1,89 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+.box img{
+    height: 150px;
+    width: 150px;
+}
+
+.box{
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 300px;
+    width: 250px;
+    margin-top: 30px;
+}
+
+#service{
+    display: flex;
+    justify-content: space-between;
+}
+
+.h-primary{
+    font-size: 2.8rem;
+    padding: 20px;
+}
+
+.center{
+    text-align: center;
+}
+
+.h-secondary{
+    font-size: 2.2rem;
+    padding: 20px;
+}
+
+.btn{
+    padding: 6px 20px;
+    border: 2px solid white;
+    background-color: brown;
+    color: white;
+    margin: 17px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn a{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color: black;
+}
+ 
+#product{
+    display: flex;
+}
+.p1{
+    width: 25%;
+}
+.p1 img{
+    height: 200px;
+    width:200px;
+    margin:70px 55px;
+  
+}
+.p2{
+    width:75%;
+}
+
+.p2 form input{
+    width: 800px;
+    padding: 5px;
+    border: 1.5px solid black;
+    margin-left: 30px;
+}
+
+.p2 form label{
+    margin-left: 30px;
+}
